@@ -34,7 +34,7 @@ jobs:
       - name: Install Turbowarp
         run: npm install -g @turbowarp/packager
       - name: Build project
-        run: npx @turbowarp/packager --input "Apple Picker-v1.sb3" -output dist --settings turbowarp-packager-settings.json
+        run: npx @turbowarp/packager --input "Apple Picker-v1.sb3" --output dist --settings turbowarp-packager-settings.json
       - name: Setup Pages
         uses: actions/configure-pages@v3
       - name: Upload artifact
