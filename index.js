@@ -1,11 +1,11 @@
 const fs = require("fs");
 const path = require("path");
 const AdmZip = require("adm-zip");
-const commander = require("commander");
 const Packager = require("@turbowarp/packager");
+const { program } = require("commander");
 
 // Define the command line arguments
-commander
+program
   .option("-i, --input <inputFile>", "The input Scratch 3.0 project file")
   .option(
     "-o, --output <outputFolder>",
@@ -14,14 +14,16 @@ commander
   .option("-s, --settings <settingsFile>", "The settings file for the packager")
   .parse(process.argv);
 
+const args = program.opts();
+
 // Check that all required arguments are present
-if (!commander.input || !commander.output || !commander.settings) {
+if (!args.input || !args.output || !args.settings) {
   console.error("Please provide --input, --output, and --settings arguments");
   process.exit(1);
 }
 
 // Read the settings from a JSON file
-const settings = JSON.parse(fs.readFileSync(settingsPath, "utf-8"));
+const settings = JSON.parse(fs.readFileSync(args.settings, "utf-8"));
 
 //extractzip method accepts zip file and extracts it to the specified path
 const extractzip = (zipPath, outputPath) => {
@@ -56,7 +58,7 @@ const run = async (inputPath, outputPath, settings) => {
   }
 };
 
-run(inputPath, outputPath, settings).catch((err) => {
+run(args.input, args.output, settings).catch((err) => {
   console.error(err);
   process.exit(1);
 });
