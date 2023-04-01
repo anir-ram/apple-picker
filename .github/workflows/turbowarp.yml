@@ -32,7 +32,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Install Turbowarp
-        run: npm install -g turbowarp
+        run: npm install -g @turbowarp/packager
       - name: Build project
         run: turbowarp build Apple Picker-v1.sb3 -o dist --settings turbowarp-packager-settings.json
       - name: Setup Pages
