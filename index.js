@@ -50,8 +50,13 @@ const run = async (inputPath, outputPath, settings) => {
   }
   const extension = result.type === "text/html" ? ".html" : ".zip";
   const outputDir = path.join(__dirname, outputPath);
+
+  if (!fs.existsSync(outputDir)) {
+    fs.promises.mkdir(outputDir, { recursive: true });
+  }
   const file = path.join(outputDir, "demo_output" + extension);
   await fs.promises.writeFile(file, data);
+  console.log(`Wrote ${file} (${data.length} bytes)`);
   if (extension === ".zip") {
     extractzip(file, outputDir);
     await fs.promises.unlink(file);
