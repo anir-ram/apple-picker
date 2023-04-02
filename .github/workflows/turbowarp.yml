@@ -32,7 +32,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Build project
-        run: npx turbowarp-packager-cli --input "Apple Picker-v2.sb3" --output dist
+        run: npx turbowarp-packager-cli --input "Apple Picker-v2.sb3" --output dist --settings turbowarp-packager-settings.json
       - name: Setup Pages
         uses: actions/configure-pages@v3
       - name: Upload artifact
